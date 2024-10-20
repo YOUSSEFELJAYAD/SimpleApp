@@ -7,10 +7,7 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 object Const {
-    const val BASE_URL :String = "https://fantasy.premierleague.com/api/"
-    const val LOGO_URL :String = "https://resources.premierleague.com/premierleague/badges/100/t"
-    const val AVATAR_URL :String = "https://resources.premierleague.com/premierleague/photos/players/110x140/p"
-    const val SHORT_URL :String = "https://fantasy.premierleague.com/dist/img/shirts/standard/"
+    const val BASE_URL :String = "https://url.com/api/"
 }
 
 @RequiresApi(Build.VERSION_CODES.O)

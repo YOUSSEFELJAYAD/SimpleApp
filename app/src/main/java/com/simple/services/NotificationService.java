@@ -35,7 +35,7 @@ public class NotificationService extends FirebaseMessagingService {
                 new Notification.Builder(this, CHANNEL_ID)
                         .setContentTitle(title)
                         .setContentText(text)
-                        .setSmallIcon(R.drawable.fpl_tiger)
+                        .setSmallIcon(R.drawable.logo_name)
                         .setAutoCancel(true);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {

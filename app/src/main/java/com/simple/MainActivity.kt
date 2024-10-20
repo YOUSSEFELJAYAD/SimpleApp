@@ -12,6 +12,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +22,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.core.content.getSystemService
 import androidx.navigation.compose.rememberNavController
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -27,6 +32,8 @@ import com.google.android.play.core.install.model.UpdateAvailability
 
 import com.simple.theme.AnimatedAppTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kiwi.orbit.compose.ui.OrbitTheme
+import kiwi.orbit.compose.ui.controls.Text
 import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
@@ -49,7 +56,8 @@ class MainActivity : ComponentActivity() {
                     appUpdateInfo,
                     AppUpdateType.IMMEDIATE,
                     this,
-                    1000)
+                    1000
+                )
             }
         }
 
@@ -75,14 +83,11 @@ class MainActivity : ComponentActivity() {
     }
     private val DefaultLightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
     private val DefaultDarkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
-
 }
 
 
-
-
 @Composable
-fun MainView(activity: MainActivity ) {
+fun MainView(activity: MainActivity) {
     var isLightThemeUser by rememberSaveable { mutableStateOf<Boolean?>(null) }
     val isLightThemeFinal = isLightThemeUser ?: !isSystemInDarkTheme()
     val navController = rememberNavController()
@@ -94,17 +99,22 @@ fun MainView(activity: MainActivity ) {
             activity.setUiMode(isLight)
         },
     ) { onThemeToggle ->
-         if(isSplashScreenFinished.not()) {
-           LaunchedEffect (Unit) {
-                        delay(1500)
-                        isSplashScreenFinished = true
-                    }
-                }
-         else
-        NavGraph(onThemeToggle = onThemeToggle, navController)
+        if (isSplashScreenFinished.not()) {
+            LaunchedEffect(Unit) {
+                delay(1500)
+                isSplashScreenFinished = true
+            }
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                Text("Splash Screen", style = OrbitTheme.typography.title1)
+            }
+        } else
+            NavGraph(onThemeToggle = onThemeToggle, navController)
     }
-
-
 }
 
 
